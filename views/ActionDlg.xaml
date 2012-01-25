@@ -1,0 +1,77 @@
+﻿<!--
+Copyright (c) 2012 JOAT Services, Jim Wallace
+See the file license.txt for copying permission.
+-->
+<Window x:Class="DbEdit.ActionDlg"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" Title="Database Editor"
+            Height="500" Width="500"
+            Icon="..\images\dbedit.ico" WindowStyle="ToolWindow"
+        MinHeight="350" MinWidth="300" Activated="Window_Activated">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+        <Style TargetType="Border">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="BorderBrush" Value="DarkSlateBlue"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="#697C7CD8"/>
+        </Style>
+    </Window.Resources>
+    <Grid Background="#2F7C7CD8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Image Grid.Row="0" Grid.RowSpan="6" Source="..\images\upload.png"></Image>
+        <Border Grid.Row="1" ></Border>
+        <Border Grid.Row="3" Grid.RowSpan="2" />
+        <Label Grid.Row="0" Name="lblTitle" FontWeight="SemiBold" FontSize="13" Grid.ColumnSpan="2">PLACEHOLDER</Label>
+        <!-- cheat to get esc to work was visible before -->
+        <Button Grid.Row="0" Height="0" Width="0" Margin="0,0,0,0" IsCancel="True" Background="#00000000">
+        </Button>
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2">
+            <StackPanel Orientation="Horizontal">
+                <Button Height="40" Width="40" Name="Upload" Click="Download_Click">
+                    <Image Source="..\images\download.png" Height="32" Width="32"></Image>
+                </Button>
+                <Label VerticalAlignment="Center">_Get all files from database</Label>
+            </StackPanel>
+            <CheckBox Height="auto" Margin="45,5,5,10" IsChecked="{Binding Path=DeleteAllBeforeGet}" ToolTip="Delete all the files with the configured extension before getting.  If extension is empty, all files are deleted" >_Delete all files in folder before get</CheckBox>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" Grid.ColumnSpan="2">
+            <Button Height="40" Width="40" Name="Download" Click="Upload_Click">
+                <Image Source="..\images\upload.png" Height="32" Width="32"></Image>
+            </Button>
+            <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" Margin="5,5,5,5" Height="auto" Width="auto">
+                <Run>Save the files below to the database</Run><LineBreak/>
+                <Run FontStyle="Italic">Checked files have been changed since last Get.</Run></TextBlock>
+        </StackPanel>
+        <DataGrid Grid.Row="4" Margin="20,5,10,10" Name="dgFiles" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" ItemsSource="{Binding Path=Files}" Grid.ColumnSpan="2" Background="#697C7CD8">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding Path=Selected}" Click="File_Checked"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Width="300*" Binding="{Binding Path=FileName, Mode=OneWay}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Left">
+            <Button Click="Option_Click">
+                <Image Source="..\images\gear.png" ToolTip="Edit the options for this folder."/>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>

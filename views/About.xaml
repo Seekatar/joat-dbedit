@@ -1,9 +1,14 @@
-﻿<Window x:Class="DbEdit.About"
+﻿<!--
+Copyright (c) 2012 JOAT Services, Jim Wallace
+See the file license.txt for copying permission.
+-->
+<Window x:Class="DbEdit.About"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
+            Icon="/DbEdit;component/images/dbedit.ico" 
              d:DesignHeight="224" d:DesignWidth="455" WindowStyle="ToolWindow" SizeToContent="WidthAndHeight" Title="About DbEdit">
     <Grid Background="#697C7CD8">
         <Grid.RowDefinitions>

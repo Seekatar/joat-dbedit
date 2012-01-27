@@ -10,7 +10,7 @@ See the file license.txt for copying permission.
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" Title="Database Editor"
             Height="500" Width="500"
-            Icon="..\images\dbedit.ico" WindowStyle="ToolWindow"
+            Icon="/DbEdit;component/images/dbedit.ico" WindowStyle="ToolWindow"
         MinHeight="350" MinWidth="300" Activated="Window_Activated" KeyDown="Window_KeyDown">
     <Window.Resources>
         <Style TargetType="Button">

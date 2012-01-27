@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Copyright (c) 2012 JOAT Services, Jim Wallace
+// See the file license.txt for copying permission.using System;
+using System;
 using System.Diagnostics;
 using System.Reflection;
 using System.Windows;

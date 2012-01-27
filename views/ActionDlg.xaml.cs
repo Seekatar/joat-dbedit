@@ -131,6 +131,7 @@ namespace DbEdit
         private void About_Click(object sender, RoutedEventArgs e)
         {
             About a = new About();
+            a.Owner = this;
             a.ShowDialog();
         }
 

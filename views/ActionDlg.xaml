@@ -11,7 +11,7 @@ See the file license.txt for copying permission.
              d:DesignHeight="300" d:DesignWidth="300" Title="Database Editor"
             Height="500" Width="500"
             Icon="..\images\dbedit.ico" WindowStyle="ToolWindow"
-        MinHeight="350" MinWidth="300" Activated="Window_Activated">
+        MinHeight="350" MinWidth="300" Activated="Window_Activated" KeyDown="Window_KeyDown">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Margin" Value="10"/>
@@ -29,34 +29,36 @@ See the file license.txt for copying permission.
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="20"></RowDefinition>
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <Image Grid.Row="0" Grid.RowSpan="6" Source="..\images\upload.png"></Image>
+        <Image Grid.Row="0" Grid.RowSpan="7" Source="..\images\dbedit.ico" Stretch="UniformToFill" Opacity=".25" ></Image>
         <Border Grid.Row="1" ></Border>
-        <Border Grid.Row="3" Grid.RowSpan="2" />
+        <Border Grid.Row="3" Grid.RowSpan="3" />
         <Label Grid.Row="0" Name="lblTitle" FontWeight="SemiBold" FontSize="13" Grid.ColumnSpan="2">PLACEHOLDER</Label>
         <!-- cheat to get esc to work was visible before -->
         <Button Grid.Row="0" Height="0" Width="0" Margin="0,0,0,0" IsCancel="True" Background="#00000000">
         </Button>
         <StackPanel Grid.Row="1" Grid.ColumnSpan="2">
             <StackPanel Orientation="Horizontal">
-                <Button Height="40" Width="40" Name="Upload" Click="Download_Click">
+                <Button Height="40" Width="40" Name="Upload" Click="Download_Click" ToolTip="Alt+G">
                     <Image Source="..\images\download.png" Height="32" Width="32"></Image>
                 </Button>
                 <Label VerticalAlignment="Center">_Get all files from database</Label>
             </StackPanel>
-            <CheckBox Height="auto" Margin="45,5,5,10" IsChecked="{Binding Path=DeleteAllBeforeGet}" ToolTip="Delete all the files with the configured extension before getting.  If extension is empty, all files are deleted" >_Delete all files in folder before get</CheckBox>
+            <CheckBox Height="auto" Margin="45,5,5,5" IsChecked="{Binding Path=DeleteAllBeforeGet}" ToolTip="Delete all the files with the configured extension before getting.  If extension is empty, all files are deleted" >_Delete all files in folder before get</CheckBox>
+            <CheckBox Height="auto" Margin="45,0,5,10" IsChecked="{Binding Path=FormatXmlOnGet}" ToolTip="For XML files, format them for easier comparing, or editing." >_Format XML file on get</CheckBox>
         </StackPanel>
         <StackPanel Grid.Row="3" Orientation="Horizontal" Grid.ColumnSpan="2">
-            <Button Height="40" Width="40" Name="Download" Click="Upload_Click">
+            <Button Height="40" Width="40" Name="Download" Click="Upload_Click" ToolTip="Alt+S">
                 <Image Source="..\images\upload.png" Height="32" Width="32"></Image>
             </Button>
-            <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" Margin="5,5,5,5" Height="auto" Width="auto">
-                <Run>Save the files below to the database</Run><LineBreak/>
-                <Run FontStyle="Italic">Checked files have been changed since last Get.</Run></TextBlock>
+            <Label VerticalAlignment="Center" Height="auto" Width="auto">
+                _Save the files below to the database</Label>
         </StackPanel>
-        <DataGrid Grid.Row="4" Margin="20,5,10,10" Name="dgFiles" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" ItemsSource="{Binding Path=Files}" Grid.ColumnSpan="2" Background="#697C7CD8">
+        <Label Grid.Row="4" Margin="20,0" FontStyle="Italic" Name="lblChecked">_Checked files have been changed since last Get.</Label>
+        <DataGrid Grid.Row="5" Margin="20,5,10,10" Name="dgFiles" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" ItemsSource="{Binding Path=Files}" Grid.ColumnSpan="2" Background="#697C7CD8">
             <DataGrid.Columns>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
@@ -68,10 +70,11 @@ See the file license.txt for copying permission.
                 <DataGridTextColumn Width="300*" Binding="{Binding Path=FileName, Mode=OneWay}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Left">
+        <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Left">
             <Button Click="Option_Click">
-                <Image Source="..\images\gear.png" ToolTip="Edit the options for this folder."/>
+                <Image Source="..\images\gear.png" ToolTip="Edit the options for this folder. Alt+O"/>
             </Button>
+            <TextBlock VerticalAlignment="Center" FontSize="16"><Hyperlink Name="About" Click="About_Click">?</Hyperlink></TextBlock>
         </StackPanel>
     </Grid>
 </Window>

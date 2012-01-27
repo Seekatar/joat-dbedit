@@ -48,7 +48,6 @@ namespace DbEdit
     {
         private Program _model;
 
-
         internal ActionViewModel(Program m, Settings s, IList<SelectedFile> files)
         {
             Files = files;
@@ -57,7 +56,16 @@ namespace DbEdit
         }
 
         public Settings Settings;
-        public bool DeleteAllBeforeGet { get; set; }
+        public bool DeleteAllBeforeGet 
+        {
+            get { return Settings.DeleteAllBeforeGet; }
+            set { Settings.DeleteAllBeforeGet = value; } 
+        }
+        public bool FormatXmlOnGet
+        {
+            get { return Settings.FormatXmlOnGet; }
+            set { Settings.FormatXmlOnGet = value; }
+        }
         public IList<SelectedFile> Files { get; set; }
 
 

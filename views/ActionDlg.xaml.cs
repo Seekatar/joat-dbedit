@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace DbEdit
 {
@@ -23,6 +24,7 @@ namespace DbEdit
 
             lblTitle.Content = String.Format("For {0}:", _model.Settings.Name);
             DataContext = _model;
+            lblChecked.Target = dgFiles;
         }
 
         private void Option_Click(object sender, RoutedEventArgs e)
@@ -101,6 +103,35 @@ namespace DbEdit
                 else
                     Close();
             }
+        }
+
+        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.F1)
+                About_Click(sender, new RoutedEventArgs());
+            else if ( (e.KeyboardDevice.Modifiers & System.Windows.Input.ModifierKeys.Alt) == System.Windows.Input.ModifierKeys.Alt )
+            {
+                if ( (e.Key == Key.O || e.SystemKey == Key.O ))
+                {
+                    Option_Click(sender, new RoutedEventArgs() );
+                }
+                else if  (e.Key == Key.G || e.SystemKey == Key.G )
+                {
+                    Download_Click(sender, new RoutedEventArgs());
+                }
+                else if (e.Key == Key.S || e.SystemKey == Key.S)
+                {
+                    Upload_Click(sender, new RoutedEventArgs());
+                }
+
+            }
+
+        }
+
+        private void About_Click(object sender, RoutedEventArgs e)
+        {
+            About a = new About();
+            a.ShowDialog();
         }
 
     }

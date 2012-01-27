@@ -1,0 +1,21 @@
+﻿<Window x:Class="DbEdit.About"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="224" d:DesignWidth="455" WindowStyle="ToolWindow" SizeToContent="WidthAndHeight" Title="About DbEdit">
+    <Grid Background="#697C7CD8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Margin="20" Grid.Row="0" Orientation="Horizontal">
+            <Image Source="/DbEdit;component/images/dbedit.ico"></Image>
+            <TextBlock Margin="20" FontFamily="Garamond" FontSize="16"><Run FontSize="24"> JOAT DdEdit</Run><LineBreak/>
+                Version <Run Name="Version"></Run><LineBreak/>
+                Copyright © 2012 <LineBreak/><Hyperlink Name="Link" Click="Hyperlink_Click" FontFamily="Arial" FontSize="12" NavigateUri="http://code.google.com/p/joat-dbedit">On Code.Google.com</Hyperlink></TextBlock>
+        </StackPanel>
+        <Button Grid.Row="1" Width="50" Margin="5" IsCancel="True">OK</Button>
+    </Grid>
+</Window>

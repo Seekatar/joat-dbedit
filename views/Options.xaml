@@ -38,9 +38,9 @@ See the file license.txt for copying permission.
             <RowDefinition Height="100"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="8" Grid.ColumnSpan="2">
+        <Border Grid.Column="1" Grid.Row="4" Grid.RowSpan="10" Grid.ColumnSpan="2">
             <Border.Background>
-                <ImageBrush ImageSource="/DbEdit;component/images/gear.png" Viewbox="0,0,1,1" />
+                <ImageBrush ImageSource="/DbEdit;component/images/gear.png" Viewbox="0,0,1,1" TileMode="Tile" Stretch="UniformToFill"  Opacity=".3"/>
             </Border.Background>
         </Border>
         <Label Grid.Column="0" Grid.Row="0">Name</Label>

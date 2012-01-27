@@ -15,7 +15,8 @@
     <StartWorkingDirectory>c:\temp\hs1</StartWorkingDirectory>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <StartArguments>-lx C:\code\dev\lifeworks\trunk\Tools\DBEditData\scriptfunctions-dev\CallBusinessLogic.py c:\temp\junk.py C:\code\dev\lifeworks\trunk\Tools\DBEditData\scriptfunctions-dev\CallBusinessLogic.py</StartArguments>
+    <StartArguments>
+    </StartArguments>
     <StartWorkingDirectory>C:\code\dev\lifeworks\trunk\Tools\DBEditData\logic_model-dev-localhost</StartWorkingDirectory>
   </PropertyGroup>
 </Project>

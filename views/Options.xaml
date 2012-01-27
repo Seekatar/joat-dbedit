@@ -59,10 +59,10 @@ See the file license.txt for copying permission.
         <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Path=ConnectionStr}" ToolTip="Connection string for the database"></TextBox>
         
         <Label Grid.Column="0" Grid.Row="5">Select statement</Label>
-        <TextBox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6" VerticalScrollBarVisibility="Auto" Text="{Binding Path=Select}" ToolTip="SQL Select statement to get data.  See documentation for details."></TextBox>
+        <TextBox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6" VerticalScrollBarVisibility="Auto" Text="{Binding Path=Select}" ToolTip="SQL Select statement to get data.  See documentation for details." AcceptsReturn="True" TextWrapping="WrapWithOverflow"></TextBox>
         
         <Label Grid.Column="0" Grid.Row="7">UpdateStatement</Label>
-        <TextBox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="8" VerticalScrollBarVisibility="Auto" Text="{Binding Path=Update}" ToolTip="SQL Update statement to set data.  See documentation for details."></TextBox>
+        <TextBox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="8" VerticalScrollBarVisibility="Auto" Text="{Binding Path=Update}" ToolTip="SQL Update statement to set data.  See documentation for details." AcceptsReturn="True" TextWrapping="WrapWithOverflow"></TextBox>
         
         <StackPanel Grid.Column="1" Grid.Row="9" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button IsCancel="True">Cancel</Button>

@@ -386,7 +386,7 @@ namespace DbEdit
         {
             int count = 0;
             XDocument doc;
-            if (Path.GetFileName(configFile) != Settings.DefaultConfigFileName)
+            if (!String.Equals(Path.GetFileName(configFile), Settings.DefaultConfigFileName, StringComparison.CurrentCultureIgnoreCase ) )
                 TaskDialog.ShowMsg(Resources.MsgFirstNotFile);
             else if (loadSettings(configFile))
             {

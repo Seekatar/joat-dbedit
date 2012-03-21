@@ -8,6 +8,8 @@ using System.Transactions;
 using System.Windows;
 using System.Xml;
 using System.Xml.Linq;
+using System.Text;
+using System.Linq;
 
 namespace DbEdit
 {
@@ -438,6 +440,8 @@ namespace DbEdit
 
                             fname += _settings.Suffix;
 
+                            fname = makeValidFileName(fname);
+
                             try
                             {
                                 doc = XDocument.Parse(MyReader[0].ToString());
@@ -473,6 +477,19 @@ namespace DbEdit
                 TaskDialog.ShowMsg(String.Format(Resources.MsgFormatBulk, Settings.DefaultConfigFileName), icon: TaskDialogIcon.Information);
             }
             return 0;
+        }
+
+        private string makeValidFileName(string fname)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (var i in fname)
+            {
+                if (Path.GetInvalidFileNameChars().Contains(i))
+                    sb.Append("_");
+                else
+                    sb.Append(i);
+            }
+            return sb.ToString();
         }
 
 

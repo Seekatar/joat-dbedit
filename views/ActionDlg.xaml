@@ -58,7 +58,7 @@ See the file license.txt for copying permission.
                 _Save the files below to the database</Label>
         </StackPanel>
         <Label Grid.Row="4" Margin="20,0" FontStyle="Italic" Name="lblChecked">_Checked files have been changed since last Get.</Label>
-        <DataGrid Grid.Row="5" Margin="20,5,10,10" Name="dgFiles" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" ItemsSource="{Binding Path=Files}" Grid.ColumnSpan="2" Background="#697C7CD8">
+        <DataGrid Grid.Row="5" Margin="20,5,10,10" Name="dgFiles" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" ItemsSource="{Binding Path=Files}" Grid.ColumnSpan="2" Background="#697C7CD8" MouseDoubleClick="dgFiles_MouseDoubleClick">
             <DataGrid.Columns>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>

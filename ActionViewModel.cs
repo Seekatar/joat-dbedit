@@ -78,5 +78,10 @@ namespace DbEdit
         {
             _model.GetAll(Files.Select(o => o.FileName),DeleteAllBeforeGet);
         }
+
+        internal void LaunchFile(string fname )
+        {
+            _model.Launch(fname);
+        }
     }
 }

@@ -249,7 +249,12 @@ namespace DbEdit
                         {
                             int rows = command.ExecuteNonQuery();
                             if (rows == 1)
+                            {
                                 ts.Complete();
+                                // clear the archive bit
+                                File.SetAttributes(sourceFile, File.GetAttributes(sourceFile) & ~FileAttributes.Archive);
+
+                            }
                             else
                                 TaskDialog.ShowMsg(String.Format(Resources.MsgFormatUpdated, rows));
                         }
@@ -267,6 +272,9 @@ namespace DbEdit
                 {
                     // just copy it to dest file
                     File.WriteAllText(destinationFile, File.ReadAllText(sourceFile));
+
+                    // clear the archive bit
+                    File.SetAttributes(destinationFile, File.GetAttributes(destinationFile) & ~FileAttributes.Archive);
                 }
             }
             else
@@ -502,6 +510,11 @@ namespace DbEdit
                 ret++;
             }
             return ret;
+        }
+
+        internal void Launch(string fname)
+        {
+            var proc = System.Diagnostics.Process.Start(Path.Combine(Path.GetDirectoryName(_settings.ConfigFile),fname));
         }
     }
 }

@@ -135,5 +135,12 @@ namespace DbEdit
             a.ShowDialog();
         }
 
+        private void dgFiles_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+            var dg = sender as DataGrid;
+            _model.LaunchFile((dg.CurrentItem as DbEdit.SelectedFile).FileName);
+        }
+
     }
 }

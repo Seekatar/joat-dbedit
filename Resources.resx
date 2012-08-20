@@ -127,6 +127,13 @@ Select a directory to map to a database table.</value>
   <data name="MsgDbLoadException" xml:space="preserve">
     <value>Got exception trying to load from database:</value>
   </data>
+  <data name="MsgDuplicate" xml:space="preserve">
+    <value>Duplicate file name {0}. </value>
+  </data>
+  <data name="MsgDuplicateDetails" xml:space="preserve">
+    <value>Skipping subsequent ones.  
+Check query to make sure keys are unique.</value>
+  </data>
   <data name="MsgFailedToGetConfig" xml:space="preserve">
     <value>Failed to retrieve config</value>
   </data>
@@ -140,7 +147,8 @@ Select a directory to map to a database table.</value>
     <value>To use bulk load option, first parameter must be a {0} file</value>
   </data>
   <data name="MsgFormatDestCreatError" xml:space="preserve">
-    <value>Error creating destination folder "{0}":\r\n{1}</value>
+    <value>Error creating destination folder "{0}":
+{1}</value>
   </data>
   <data name="MsgFormatHelp" xml:space="preserve">
     <value>DbEdit is a tool for getting and updating text columns from a database

@@ -432,6 +432,8 @@ namespace DbEdit
 
                         var MyReader = command.ExecuteReader();
 
+                        List<String> fnames = new List<string>();
+
                         while (MyReader.Read())
                         {
                             if (MyReader.FieldCount < 2)
@@ -450,6 +452,13 @@ namespace DbEdit
 
                             fname = makeValidFileName(fname);
 
+                            if (fnames.Contains(fname))
+                            {
+
+                                TaskDialog.ShowMsg(String.Format(Resources.MsgDuplicate, fname), Resources.MsgDuplicateDetails, icon: TaskDialogIcon.Warning); 
+                                continue;
+                            }
+                            fnames.Add(fname);
                             try
                             {
                                 doc = XDocument.Parse(MyReader[0].ToString());

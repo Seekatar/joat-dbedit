@@ -1,4 +1,5 @@
-﻿// Copyright (c) 2012 JOAT Services, Jim Wallace
+﻿using Microsoft.WindowsAPICodePack.Dialogs;
+// Copyright (c) 2012 JOAT Services, Jim Wallace
 // See the file license.txt for copying permission.using System;
 using System;
 using System.Windows;
@@ -32,7 +33,7 @@ namespace DbEdit
             if (!_activatedOnce && !_model.Loaded)
             {
                 _activatedOnce = true;
-                TaskDialog.ShowMsg(DbEdit.Resources.MsgFirstTime, icon: TaskDialogIcon.Information);
+                TaskDialog.ShowMsg(DbEdit.Resources.MsgFirstTime, icon: TaskDialogStandardIcon.Information);
             }
         }
     }

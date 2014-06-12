@@ -4,6 +4,7 @@ using System.Windows;
 using System.Runtime.InteropServices;
 using System;
 using System.Windows.Interop;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace DbEdit
 {
@@ -16,25 +17,25 @@ namespace DbEdit
 
         public static TaskDialogResult Show(IWin32Window owner, string text)
         {
-            return Show(owner, text, null, null, TaskDialogButtons.OK);
+            return Show(owner, text, null, null, TaskDialogStandardButtons.Ok);
         }
 
         public static TaskDialogResult Show(IWin32Window owner, string text, string instruction)
         {
-            return Show(owner, text, instruction, null, TaskDialogButtons.OK, 0);
+            return Show(owner, text, instruction, null, TaskDialogStandardButtons.Ok, 0);
         }
 
         public static TaskDialogResult Show(IWin32Window owner, string text, string instruction, string caption)
         {
-            return Show(owner, text, instruction, caption, TaskDialogButtons.OK, 0);
+            return Show(owner, text, instruction, caption, TaskDialogStandardButtons.Ok, 0);
         }
 
-        public static TaskDialogResult Show(IWin32Window owner, string text, string instruction, string caption, TaskDialogButtons buttons)
+        public static TaskDialogResult Show(IWin32Window owner, string text, string instruction, string caption, TaskDialogStandardButtons buttons)
         {
             return Show(owner, text, instruction, caption, buttons, 0);
         }
 
-        public static TaskDialogResult Show(IWin32Window owner, string text, string instruction, string caption, TaskDialogButtons buttons, TaskDialogIcon icon)
+        public static TaskDialogResult Show(IWin32Window owner, string text, string instruction, string caption, TaskDialogStandardButtons buttons, TaskDialogStandardIcon icon)
         {
             return ShowInternal(owner.Handle, text, instruction, caption, buttons, icon);
         }
@@ -45,25 +46,25 @@ namespace DbEdit
 
         public static TaskDialogResult Show(string text)
         {
-            return Show(text, null, null, TaskDialogButtons.OK);
+            return Show(text, null, null, TaskDialogStandardButtons.Ok);
         }
 
         public static TaskDialogResult Show(string text, string instruction)
         {
-            return Show(text, instruction, null, TaskDialogButtons.OK, 0);
+            return Show(text, instruction, null, TaskDialogStandardButtons.Ok, 0);
         }
 
         public static TaskDialogResult Show(string text, string instruction, string caption)
         {
-            return Show(text, instruction, caption, TaskDialogButtons.OK, 0);
+            return Show(text, instruction, caption, TaskDialogStandardButtons.Ok, 0);
         }
 
-        public static TaskDialogResult Show(string text, string instruction, string caption, TaskDialogButtons buttons)
+        public static TaskDialogResult Show(string text, string instruction, string caption, TaskDialogStandardButtons buttons)
         {
             return Show(text, instruction, caption, buttons, 0);
         }
 
-        public static TaskDialogResult Show(string text, string instruction, string caption, TaskDialogButtons buttons, TaskDialogIcon icon)
+        public static TaskDialogResult Show(string text, string instruction, string caption, TaskDialogStandardButtons buttons, TaskDialogStandardIcon icon)
         {
             return ShowInternal(IntPtr.Zero, text, instruction, caption, buttons, icon);
         }
@@ -77,7 +78,7 @@ namespace DbEdit
                     return MessageBoxResult.Cancel;
                 case TaskDialogResult.No:
                     return  MessageBoxResult.No;
-                case TaskDialogResult.OK:
+                case TaskDialogResult.Ok:
                     return MessageBoxResult.OK;
                 case TaskDialogResult.None:
                     return MessageBoxResult.None;
@@ -88,37 +89,37 @@ namespace DbEdit
             }
         }
 
-        private static TaskDialogIcon mapMsgBoxImage(MessageBoxImage icon)
+        private static TaskDialogStandardIcon mapMsgBoxImage(MessageBoxImage icon)
         {
             switch ( icon )
             {
                 case MessageBoxImage.Exclamation:
-                    return TaskDialogIcon.Warning;
+                    return TaskDialogStandardIcon.Warning;
                 case MessageBoxImage.Error:
-                    return TaskDialogIcon.Stop;
+                    return TaskDialogStandardIcon.Error;
                 case MessageBoxImage.Information:
-                    return TaskDialogIcon.Information;
+                    return TaskDialogStandardIcon.Information;
                 default:
                     return 0;
             }
         }
 
-        private static TaskDialogButtons mapMsgBoxButton(MessageBoxButton buttons)
+        private static TaskDialogStandardButtons mapMsgBoxButton(MessageBoxButton buttons)
         {
             switch( buttons )
             {
                 case MessageBoxButton.OKCancel:
-                    return TaskDialogButtons.OK | TaskDialogButtons.Cancel;
+                    return TaskDialogStandardButtons.Ok | TaskDialogStandardButtons.Cancel;
                 case MessageBoxButton.YesNoCancel:
-                    return TaskDialogButtons.YesNoCancel;
+                    return TaskDialogStandardButtons.Yes | TaskDialogStandardButtons.No | TaskDialogStandardButtons.Cancel;
                 case MessageBoxButton.YesNo:
-                    return TaskDialogButtons.Yes | TaskDialogButtons.No;
+                    return TaskDialogStandardButtons.Yes | TaskDialogStandardButtons.No;
                 default:
-                    return TaskDialogButtons.OK;
+                    return TaskDialogStandardButtons.Ok;
             }
         }
 
-        public static TaskDialogResult ShowMsg(Window parent, string text, string instruction = "", TaskDialogButtons buttons = TaskDialogButtons.OK, TaskDialogIcon icon = TaskDialogIcon.Warning)
+        public static TaskDialogResult ShowMsg(Window parent, string text, string instruction = "", TaskDialogStandardButtons buttons = TaskDialogStandardButtons.Ok, TaskDialogStandardIcon icon = TaskDialogStandardIcon.Warning)
         {
             return TaskDialog.ShowInternal(parent != null ? new System.Windows.Interop.WindowInteropHelper(parent).Handle : IntPtr.Zero,
                                             instruction,
@@ -128,7 +129,7 @@ namespace DbEdit
                                             icon);
         }
 
-        public static TaskDialogResult ShowMsg(string text, string instruction = "", TaskDialogButtons buttons = TaskDialogButtons.OK, TaskDialogIcon icon = TaskDialogIcon.Warning)
+        public static TaskDialogResult ShowMsg(string text, string instruction = "", TaskDialogStandardButtons buttons = TaskDialogStandardButtons.Ok, TaskDialogStandardIcon icon = TaskDialogStandardIcon.Warning)
         {
             return TaskDialog.ShowInternal(IntPtr.Zero,
                                             instruction,
@@ -142,7 +143,7 @@ namespace DbEdit
 
         #region Core implementation
 
-        private static TaskDialogResult ShowInternal(IntPtr owner, string text, string instruction, string caption, TaskDialogButtons buttons, TaskDialogIcon icon)
+        private static TaskDialogResult ShowInternal(IntPtr owner, string text, string instruction, string caption, TaskDialogStandardButtons buttons, TaskDialogStandardIcon icon)
         {
             var td = new Microsoft.WindowsAPICodePack.Dialogs.TaskDialog();
 
@@ -150,67 +151,14 @@ namespace DbEdit
             td.Text = text;
             td.InstructionText = instruction;
             td.Caption = caption;
-            td.StandardButtons = Microsoft.WindowsAPICodePack.Dialogs.TaskDialogStandardButtons.Ok; //  buttons;
-            td.Icon = Microsoft.WindowsAPICodePack.Dialogs.TaskDialogStandardIcon.Information; //  icon;
+            td.StandardButtons = buttons;
+            td.Icon = icon;
 
-            var p = td.Show();
-
-            switch (p)
-            {
-                case Microsoft.WindowsAPICodePack.Dialogs.TaskDialogResult.Ok:
-                    return TaskDialogResult.OK;
-                case Microsoft.WindowsAPICodePack.Dialogs.TaskDialogResult.Cancel:
-                    return TaskDialogResult.Cancel;
-                case Microsoft.WindowsAPICodePack.Dialogs.TaskDialogResult.Retry:
-                    return TaskDialogResult.Retry;
-                case Microsoft.WindowsAPICodePack.Dialogs.TaskDialogResult.Yes:
-                    return TaskDialogResult.Yes;
-                case Microsoft.WindowsAPICodePack.Dialogs.TaskDialogResult.No:
-                    return TaskDialogResult.No;
-                case Microsoft.WindowsAPICodePack.Dialogs.TaskDialogResult.Close:
-                    return TaskDialogResult.Close;
-                default:
-                    return TaskDialogResult.None;
-            }
+            return td.Show();
         }
 
         #endregion
     }
 
-    [Flags]
-    public enum TaskDialogButtons
-    {
-        OK = 0x0001,
-        Cancel = 0x0008,
-        Yes = 0x0002,
-        No = 0x0004,
-        Retry = 0x0010,
-        Close = 0x0020,
-        YesNoCancel = Yes | No | Cancel
-    }
-
-    public enum TaskDialogIcon
-    {
-        Information = UInt16.MaxValue - 2,
-        Warning = UInt16.MaxValue,
-        Stop = UInt16.MaxValue - 1,        
-        SecurityWarning = UInt16.MaxValue - 5,
-        SecurityError = UInt16.MaxValue - 6,
-        SecuritySuccess = UInt16.MaxValue - 7,
-        SecurityShield = UInt16.MaxValue - 3,
-        SecurityShieldBlue = UInt16.MaxValue - 4,
-        SecurityShieldGray = UInt16.MaxValue - 8
-    }
-
-    public enum TaskDialogResult
-    {
-        None,
-        OK,
-        Cancel,
-        Yes,
-        No,
-        Retry,
-        Close
-    }
 
 }

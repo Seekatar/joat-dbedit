@@ -1,4 +1,5 @@
-﻿// Copyright (c) 2012 JOAT Services, Jim Wallace
+﻿using Microsoft.WindowsAPICodePack.Dialogs;
+// Copyright (c) 2012 JOAT Services, Jim Wallace
 // See the file license.txt for copying permission.using System;
 using System;
 using System.IO;
@@ -58,11 +59,11 @@ namespace DbEdit
         private void Upload_Click(object sender, RoutedEventArgs e)
         {
             if (_model.Files.Count(o => o.Selected) == 0)
-                TaskDialog.ShowMsg("No items selected.", icon: TaskDialogIcon.Information);
+                TaskDialog.ShowMsg("No items selected.", icon: TaskDialogStandardIcon.Information);
             else
             {
                 int count = _model.Upload();
-                TaskDialog.ShowMsg(String.Format("Uploaded {0} file{1}", count, count == 0 ? "" : "s"), icon:TaskDialogIcon.Information);
+                TaskDialog.ShowMsg(String.Format("Uploaded {0} file{1}", count, count == 0 ? "" : "s"), icon:TaskDialogStandardIcon.Information);
                 this.Close();
             }
         }
@@ -71,7 +72,7 @@ namespace DbEdit
         {
             if (!_model.DeleteAllBeforeGet || TaskDialog.ShowMsg(this, DbEdit.Resources.MsgConfirmDelete, 
                         "This will delete all the files in this folder of the type retrieved by this config file.",
-                        buttons:TaskDialogButtons.YesNoCancel, icon:TaskDialogIcon.Warning) == TaskDialogResult.Yes )
+                        buttons: TaskDialogStandardButtons.Yes | TaskDialogStandardButtons.No | TaskDialogStandardButtons.Cancel, icon: TaskDialogStandardIcon.Warning) == TaskDialogResult.Yes)
             {
                 _model.Download();
                 this.Close();

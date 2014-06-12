@@ -10,6 +10,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Text;
 using System.Linq;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace DbEdit
 {
@@ -25,7 +26,7 @@ namespace DbEdit
         /// </summary>
         static void ShowHelpAndExit()
         {
-            TaskDialog.ShowMsg(String.Format(Resources.MsgFormatHelp,Settings.DefaultConfigFileName), buttons:TaskDialogButtons.OK, icon:TaskDialogIcon.Information);
+            TaskDialog.ShowMsg(String.Format(Resources.MsgFormatHelp,Settings.DefaultConfigFileName), buttons:TaskDialogStandardButtons.Ok, icon:TaskDialogStandardIcon.Information);
             System.Environment.Exit(7);
         }
 
@@ -228,7 +229,7 @@ namespace DbEdit
                 {
                     if (String.IsNullOrWhiteSpace(_settings.Update))
                     {
-                        TaskDialog.ShowMsg(Resources.MsgNoUpdate, icon: TaskDialogIcon.Warning);
+                        TaskDialog.ShowMsg(Resources.MsgNoUpdate, icon: TaskDialogStandardIcon.Warning);
                         return 9;
                     }
                     var connection = new SqlConnection(_settings.ConnectionStr);
@@ -237,7 +238,7 @@ namespace DbEdit
                     SqlCommand command = buildCommand(originalFile, _settings.Update, connection);
                     if (command == null)
                     {
-                        TaskDialog.ShowMsg(Resources.MsgSqlFailed, icon: TaskDialogIcon.Warning);
+                        TaskDialog.ShowMsg(Resources.MsgSqlFailed, icon: TaskDialogStandardIcon.Warning);
                         return 9;
                     }
 
@@ -455,7 +456,7 @@ namespace DbEdit
                             if (fnames.Contains(fname))
                             {
 
-                                TaskDialog.ShowMsg(String.Format(Resources.MsgDuplicate, fname), Resources.MsgDuplicateDetails, icon: TaskDialogIcon.Warning); 
+                                TaskDialog.ShowMsg(String.Format(Resources.MsgDuplicate, fname), Resources.MsgDuplicateDetails, icon: TaskDialogStandardIcon.Warning); 
                                 continue;
                             }
                             fnames.Add(fname);
@@ -481,7 +482,7 @@ namespace DbEdit
                     {
                         TaskDialog.ShowMsg(Resources.MsgDbLoadException + e.ToString());
                     }
-                    TaskDialog.ShowMsg(String.Format(Resources.MsgFormatLoaded, count, count != 1 ? "s" : String.Empty), icon: TaskDialogIcon.Information);
+                    TaskDialog.ShowMsg(String.Format(Resources.MsgFormatLoaded, count, count != 1 ? "s" : String.Empty), icon: TaskDialogStandardIcon.Information);
 
                 }
                 else
@@ -491,7 +492,7 @@ namespace DbEdit
             }
             else
             {
-                TaskDialog.ShowMsg(String.Format(Resources.MsgFormatBulk, Settings.DefaultConfigFileName), icon: TaskDialogIcon.Information);
+                TaskDialog.ShowMsg(String.Format(Resources.MsgFormatBulk, Settings.DefaultConfigFileName), icon: TaskDialogStandardIcon.Information);
             }
             return 0;
         }

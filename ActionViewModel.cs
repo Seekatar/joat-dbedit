@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace DbEdit
 {
@@ -48,7 +49,7 @@ namespace DbEdit
     {
         private Program _model;
 
-        internal ActionViewModel(Program m, Settings s, IList<SelectedFile> files)
+        internal ActionViewModel(Program m, Settings s, ObservableCollection<SelectedFile> files)
         {
             Files = files;
             Settings = s;
@@ -66,7 +67,7 @@ namespace DbEdit
             get { return Settings.FormatXmlOnGet; }
             set { Settings.FormatXmlOnGet = value; }
         }
-        public IList<SelectedFile> Files { get; set; }
+        public ObservableCollection<SelectedFile> Files { get; set; }
 
 
         internal int Upload()

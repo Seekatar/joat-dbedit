@@ -11,6 +11,7 @@ using System.Xml.Linq;
 using System.Text;
 using System.Linq;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using System.Collections.ObjectModel;
 
 namespace DbEdit
 {
@@ -118,7 +119,7 @@ namespace DbEdit
         /// <param name="configFileName"></param>
         private void ShowDialog(string configFileName)
         {
-            IList<SelectedFile> files = new List<SelectedFile>();
+            var files = new ObservableCollection<SelectedFile>();
             _settings = new Settings();
             if (_settings.Load(configFileName))
             {

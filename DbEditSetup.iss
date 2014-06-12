@@ -16,6 +16,11 @@ AppName=JOAT {#AppName}
 AppVersion={#AppVersion}
 ChangesAssociations=yes
 UninstallDisplayIcon={app}\{#AppName}.exe
+AppPublisher=JOAT Services (Jim Wallace)
+AppPublisherURL=https://code.google.com/p/joat-dbedit/
+AppSupportURL=https://code.google.com/p/joat-dbedit/
+OutputBaseFilename={#AppName}Setup
+OutputDir={#SourcePath}
 
 [Files]
 Source: {#AppName}.exe; DestDir: "{app}"

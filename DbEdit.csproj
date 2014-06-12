@@ -159,12 +159,16 @@
   <ItemGroup>
     <None Include="app.manifest" />
     <None Include="packages.config" />
+    <None Include="DbEditSetup.iss" />
     <Content Include="license.txt" />
     <Content Include="readme.rtf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>"C:\Program Files (x86)\Inno Setup 5\ISCC.exe" $(ProjectDir)\DbEditSetup.iss</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -68,9 +68,59 @@ namespace DbEdit
             return ShowInternal(IntPtr.Zero, text, instruction, caption, buttons, icon);
         }
 
+        public static MessageBoxResult ShowMsg(Window parent, string text, string instruction = "", MessageBoxButton buttons = MessageBoxButton.OK, MessageBoxImage icon = MessageBoxImage.Warning)
+        {
+            switch ( ShowMsg( parent, text, instruction, mapMsgBoxButton(buttons), mapMsgBoxImage(icon)))
+            {
+                case TaskDialogResult.Cancel:
+                case TaskDialogResult.Close:
+                    return MessageBoxResult.Cancel;
+                case TaskDialogResult.No:
+                    return  MessageBoxResult.No;
+                case TaskDialogResult.OK:
+                    return MessageBoxResult.OK;
+                case TaskDialogResult.None:
+                    return MessageBoxResult.None;
+                case TaskDialogResult.Yes:
+                    return MessageBoxResult.Yes;
+                default:
+                    return MessageBoxResult.None;
+            }
+        }
+
+        private static TaskDialogIcon mapMsgBoxImage(MessageBoxImage icon)
+        {
+            switch ( icon )
+            {
+                case MessageBoxImage.Exclamation:
+                    return TaskDialogIcon.Warning;
+                case MessageBoxImage.Error:
+                    return TaskDialogIcon.Stop;
+                case MessageBoxImage.Information:
+                    return TaskDialogIcon.Information;
+                default:
+                    return 0;
+            }
+        }
+
+        private static TaskDialogButtons mapMsgBoxButton(MessageBoxButton buttons)
+        {
+            switch( buttons )
+            {
+                case MessageBoxButton.OKCancel:
+                    return TaskDialogButtons.OK | TaskDialogButtons.Cancel;
+                case MessageBoxButton.YesNoCancel:
+                    return TaskDialogButtons.YesNoCancel;
+                case MessageBoxButton.YesNo:
+                    return TaskDialogButtons.Yes | TaskDialogButtons.No;
+                default:
+                    return TaskDialogButtons.OK;
+            }
+        }
+
         public static TaskDialogResult ShowMsg(Window parent, string text, string instruction = "", TaskDialogButtons buttons = TaskDialogButtons.OK, TaskDialogIcon icon = TaskDialogIcon.Warning)
         {
-            return TaskDialog.ShowInternal(new System.Windows.Interop.WindowInteropHelper(parent).Handle,
+            return TaskDialog.ShowInternal(parent != null ? new System.Windows.Interop.WindowInteropHelper(parent).Handle : IntPtr.Zero,
                                             instruction,
                                             text,
                                             Resources.Title,
@@ -94,23 +144,30 @@ namespace DbEdit
 
         private static TaskDialogResult ShowInternal(IntPtr owner, string text, string instruction, string caption, TaskDialogButtons buttons, TaskDialogIcon icon)
         {
-            int p;
-            if (_TaskDialog(owner, IntPtr.Zero, caption, instruction, text, (int)buttons, new IntPtr((int)icon), out p) != 0)
-                throw new InvalidOperationException("Something weird has happened.");
+            var td = new Microsoft.WindowsAPICodePack.Dialogs.TaskDialog();
+
+            td.OwnerWindowHandle = owner;
+            td.Text = text;
+            td.InstructionText = instruction;
+            td.Caption = caption;
+            td.StandardButtons = Microsoft.WindowsAPICodePack.Dialogs.TaskDialogStandardButtons.Ok; //  buttons;
+            td.Icon = Microsoft.WindowsAPICodePack.Dialogs.TaskDialogStandardIcon.Information; //  icon;
+
+            var p = td.Show();
 
             switch (p)
             {
-                case 1:
+                case Microsoft.WindowsAPICodePack.Dialogs.TaskDialogResult.Ok:
                     return TaskDialogResult.OK;
-                case 2:
+                case Microsoft.WindowsAPICodePack.Dialogs.TaskDialogResult.Cancel:
                     return TaskDialogResult.Cancel;
-                case 4:
+                case Microsoft.WindowsAPICodePack.Dialogs.TaskDialogResult.Retry:
                     return TaskDialogResult.Retry;
-                case 6:
+                case Microsoft.WindowsAPICodePack.Dialogs.TaskDialogResult.Yes:
                     return TaskDialogResult.Yes;
-                case 7:
+                case Microsoft.WindowsAPICodePack.Dialogs.TaskDialogResult.No:
                     return TaskDialogResult.No;
-                case 8:
+                case Microsoft.WindowsAPICodePack.Dialogs.TaskDialogResult.Close:
                     return TaskDialogResult.Close;
                 default:
                     return TaskDialogResult.None;

@@ -1,9 +1,9 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbEdit", "DbEdit.csproj", "{9497345F-560A-4219-8075-A21C7CD46EA3}"
-EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{744CA6D2-A59C-4651-823F-10658EB6FA01}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +15,6 @@ Global
 		{9497345F-560A-4219-8075-A21C7CD46EA3}.Debug|x86.Build.0 = Debug|x86
 		{9497345F-560A-4219-8075-A21C7CD46EA3}.Release|x86.ActiveCfg = Release|x86
 		{9497345F-560A-4219-8075-A21C7CD46EA3}.Release|x86.Build.0 = Release|x86
-		{744CA6D2-A59C-4651-823F-10658EB6FA01}.Debug|x86.ActiveCfg = Debug
-		{744CA6D2-A59C-4651-823F-10658EB6FA01}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

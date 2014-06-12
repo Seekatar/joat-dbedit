@@ -16,7 +16,7 @@ namespace DbEdit
         {
             InitializeComponent();
             FileVersionInfo fi = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location);
-            Version.Text = String.Format("{0}.{0}", fi.ProductMajorPart, fi.ProductMinorPart );
+            Version.Text = String.Format("{0}.{1}", fi.ProductMajorPart, fi.ProductMinorPart );
         }
 
         private void Hyperlink_Click(object sender, RoutedEventArgs e)

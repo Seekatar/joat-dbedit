@@ -102,7 +102,7 @@ namespace DbEdit
             catch (Exception e)
             {
 #if DEBUG
-                throw;
+                throw e;
 #else
                 TaskDialog.ShowMsg("Got exception:" + e.GetType().Name + Environment.NewLine + e.Message);
 #endif
@@ -112,7 +112,7 @@ namespace DbEdit
         }
 
         /// <summary>
-        /// show the dialog to allow the user to get/save/configure
+        /// show the dialog to allow the user to gt/save/configure
         /// </summary>
         /// <param name="configFileName"></param>
         private void ShowDialog(string configFileName)

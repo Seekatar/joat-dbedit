@@ -93,12 +93,16 @@ namespace DbEdit
                 {
                     Settings s = new Settings();
                     s.ConfigFile = Path.Combine(ofd.SelectedPath, Settings.DefaultConfigFileName);
-                    Options od = new Options(s);
-                    bool? odret = od.ShowDialog();
-                    if (odret.HasValue && odret.Value)
-                        _model.Settings.Load(Path.Combine(ofd.SelectedPath, Settings.DefaultConfigFileName));
-                    else
-                        Close();
+                    if (!File.Exists(s.ConfigFile) || !_model.Settings.Load(s.ConfigFile))
+                    {
+                        Options od = new Options(s);
+                        bool? odret = od.ShowDialog();
+                        if (odret.HasValue && odret.Value)
+                            _model.Settings.Load(s.ConfigFile);
+                        else
+                            Close();
+                    }
+                    _model.PopulateFiles(ofd.SelectedPath);
                 }
                 else
                     Close();
@@ -139,8 +143,8 @@ namespace DbEdit
         {
 
             var dg = sender as DataGrid;
-            _model.LaunchFile((dg.CurrentItem as DbEdit.SelectedFile).FileName);
+            if ( dg.CurrentItem != null )
+                _model.LaunchFile((dg.CurrentItem as DbEdit.SelectedFile).FileName);
         }
-
     }
 }

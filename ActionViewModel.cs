@@ -79,6 +79,11 @@ namespace DbEdit
             _model.GetAll(Files.Select(o => o.FileName),DeleteAllBeforeGet);
         }
 
+        internal void PopulateFiles(string folder)
+        {
+            _model.PopulateFiles(folder, Files);
+        }
+
         internal void LaunchFile(string fname )
         {
             _model.Launch(fname);

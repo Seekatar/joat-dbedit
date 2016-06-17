@@ -106,7 +106,7 @@ namespace DbEdit
 #if DEBUG
                 throw e;
 #else
-                TaskDialog.ShowMsg("Got exception:" + e.GetType().Name + Environment.NewLine + e.Message);
+                MessageBox.Show("Got exception:" + e.GetType().Name + Environment.NewLine + e.Message);
 #endif
             }
 

@@ -48,7 +48,7 @@ The options button in the UI allows editing of the config file (or you may edit 
 **Update (update)** is the SQL UPDATE statement used when updating the database.  @content is a placeholder for the contents of the file and as with the select, the where clause will use @key0…@keyN.
 ## Python Script Example
 Here is a config for Python scripts stored in a table.  The NAME column of the join was the unique file name, with included the “.py” extension which is why suffix is an empty string
-``` Python
+``` XML
 <JoatDbEdit name="Python Scripts" suffix="" key-delimiter="" key-stop="">
   <connectionString>
     Server=localhost;Initial Catalog=MY_DB;Integrated Security=True;MultipleActiveResultSets=True
